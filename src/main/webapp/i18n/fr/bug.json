@@ -1,0 +1,31 @@
+{
+  "bugTrackingApp": {
+    "bug": {
+      "home": {
+        "title": "Bugs",
+        "createLabel": "Créer un nouveau Bug",
+        "createOrEditLabel": "Créer ou éditer un Bug",
+        "notFound": "Aucun Bug trouvé"
+      },
+      "created": "Un nouveau Bug a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bug avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bug avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Bug {{ id }} ?"
+      },
+      "detail": {
+        "title": "Bug"
+      },
+      "title": "Title",
+      "description": "Description",
+      "priority": "Priority",
+      "isResolved": "Is Resolved",
+      "closedAt": "Closed At",
+      "reopenedAt": "Reopened At",
+      "project": "Project",
+      "notes": "Notes",
+      "closedBy": "Closed By",
+      "reopenedBy": "Reopened By"
+    }
+  }
+}

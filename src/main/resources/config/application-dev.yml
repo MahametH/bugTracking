@@ -37,9 +37,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/bugTracking
-    username: bugTracking
-    password:
+    url: jdbc:postgresql://localhost:5432/bug_tracking_dev
+    username: hanounou
+    password: Dbpwd
     hikari:
       poolName: Hikari
       auto-commit: false

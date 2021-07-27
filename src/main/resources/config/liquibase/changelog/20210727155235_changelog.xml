@@ -1,0 +1,80 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="maham (generated)" id="1627401171249-2">
+        <createTable tableName="bug">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="bugPK"/>
+            </column>
+            <column name="closed_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="is_resolved" type="BOOLEAN"/>
+            <column name="priority" type="VARCHAR(255)"/>
+            <column name="reopened_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="closed_by_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reopened_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-3">
+        <createTable tableName="member">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="memberPK"/>
+            </column>
+            <column name="joined_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-4">
+        <createTable tableName="note">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="notePK"/>
+            </column>
+            <column name="body" type="VARCHAR(255)"/>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bug_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-5">
+        <createTable tableName="project">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="projectPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-6">
+        <addUniqueConstraint columnNames="name" constraintName="UC_PROJECTNAME_COL" tableName="project"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-7">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="note" constraintName="FK19i764asnj53xlwmgmsaahnn6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-8">
+        <addForeignKeyConstraint baseColumnNames="closed_by_id" baseTableName="bug" constraintName="FK3tpw92d6vo6mhg2urr3mojpuj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-9">
+        <addForeignKeyConstraint baseColumnNames="bug_id" baseTableName="note" constraintName="FK7c8kma2y6c1r55hwg9tc96hbf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="bug" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-10">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="bug" constraintName="FKi91cmp5c6v9yv26iow1g0emxc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-11">
+        <addForeignKeyConstraint baseColumnNames="reopened_by_id" baseTableName="bug" constraintName="FKla1jxuqxd1f95n04ks5hldgoi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-12">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="member" constraintName="FKn4gkqnpww70e7vcyfh0lt2imn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="maham (generated)" id="1627401171249-1">
+        <alterSequence sequenceName="sequence_generator"/>
+    </changeSet>
+</databaseChangeLog>

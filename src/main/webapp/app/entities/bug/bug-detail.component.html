@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bug">
+            <h2><span jhiTranslate="bugTrackingApp.bug.detail.title">Bug</span> {{ bug.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bugTrackingApp.bug.title">Title</span></dt>
+                <dd>
+                    <span>{{ bug.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.description">Description</span></dt>
+                <dd>
+                    <span>{{ bug.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.priority">Priority</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'bugTrackingApp.Priority.' + bug.priority }}">{{ bug.priority }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.isResolved">Is Resolved</span></dt>
+                <dd>
+                    <span>{{ bug.isResolved }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.closedAt">Closed At</span></dt>
+                <dd>
+                    <span>{{ bug.closedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.reopenedAt">Reopened At</span></dt>
+                <dd>
+                    <span>{{ bug.reopenedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.project">Project</span></dt>
+                <dd>
+                    <div *ngIf="bug.projectId">
+                        <a [routerLink]="['/project', bug.projectId, 'view']">{{ bug.projectName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.closedBy">Closed By</span></dt>
+                <dd>
+                    {{ bug.closedByLogin }}
+                </dd>
+                <dt><span jhiTranslate="bugTrackingApp.bug.reopenedBy">Reopened By</span></dt>
+                <dd>
+                    {{ bug.reopenedByLogin }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bug', bug.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

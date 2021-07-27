@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="bugTrackingApp.bug.home.title">Bugs</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bug" [routerLink]="['/bug/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="bugTrackingApp.bug.home.createLabel">
+            Create a new Bug
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="bugs?.length === 0">
+        <span jhiTranslate="bugTrackingApp.bug.home.notFound">No bugs found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="bugs && bugs.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="bugTrackingApp.bug.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="bugTrackingApp.bug.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="priority"><span jhiTranslate="bugTrackingApp.bug.priority">Priority</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isResolved"><span jhiTranslate="bugTrackingApp.bug.isResolved">Is Resolved</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="closedAt"><span jhiTranslate="bugTrackingApp.bug.closedAt">Closed At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="reopenedAt"><span jhiTranslate="bugTrackingApp.bug.reopenedAt">Reopened At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="projectName"><span jhiTranslate="bugTrackingApp.bug.project">Project</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="closedByLogin"><span jhiTranslate="bugTrackingApp.bug.closedBy">Closed By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="reopenedByLogin"><span jhiTranslate="bugTrackingApp.bug.reopenedBy">Reopened By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let bug of bugs ;trackBy: trackId">
+                    <td><a [routerLink]="['/bug', bug.id, 'view']">{{ bug.id }}</a></td>
+                    <td>{{ bug.title }}</td>
+                    <td>{{ bug.description }}</td>
+                    <td jhiTranslate="{{ 'bugTrackingApp.Priority.' + bug.priority }}">{{ bug.priority }}</td>
+                    <td>{{ bug.isResolved }}</td>
+                    <td>{{ bug.closedAt | date:'medium' }}</td>
+                    <td>{{ bug.reopenedAt | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="bug.projectId">
+                            <a [routerLink]="['/project', bug.projectId , 'view']" >{{ bug.projectName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ bug.closedByLogin }}
+                    </td>
+                    <td>
+                        {{ bug.reopenedByLogin }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/bug', bug.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/bug', bug.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(bug)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

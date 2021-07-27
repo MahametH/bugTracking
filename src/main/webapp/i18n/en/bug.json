@@ -1,0 +1,31 @@
+{
+  "bugTrackingApp": {
+    "bug": {
+      "home": {
+        "title": "Bugs",
+        "createLabel": "Create a new Bug",
+        "createOrEditLabel": "Create or edit a Bug",
+        "notFound": "No Bugs found"
+      },
+      "created": "A new Bug is created with identifier {{ param }}",
+      "updated": "A Bug is updated with identifier {{ param }}",
+      "deleted": "A Bug is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bug {{ id }}?"
+      },
+      "detail": {
+        "title": "Bug"
+      },
+      "title": "Title",
+      "description": "Description",
+      "priority": "Priority",
+      "isResolved": "Is Resolved",
+      "closedAt": "Closed At",
+      "reopenedAt": "Reopened At",
+      "project": "Project",
+      "notes": "Notes",
+      "closedBy": "Closed By",
+      "reopenedBy": "Reopened By"
+    }
+  }
+}
